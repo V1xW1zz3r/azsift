@@ -103,15 +103,18 @@ Turn booleans off with `=false`, e.g. `-deep=false`. Note that `-f` and `-listf`
 | right-hand bracket | Child resources within `-subwindow` of each other: probably one operation |
 | `[hypothesis: …]` | Matched by timing only |
 
-Bundles are anchored by ARM/Bicep deployments (2+ resources), major workload types (VMs, AKS, Web Apps, Data Factory, Synapse, Databricks, ML Workspaces) or top-level owner resources, and temporal batches (2+ resources created together in the same resource group). Within a bundle, members are grouped from strongest evidence to weakest: template deployments, parent/child ownership, `managedBy` ownership, property references (including attached user-assigned identities), and timing. Timing only groups resources in the same resource group (and by the same creator, when known), and is always labeled a hypothesis.
+Bundles are anchored by ARM/Bicep deployments (2+ resources), major workload types (VMs, AKS, Web Apps, Data Factory, Synapse, Databricks, ML Workspaces) or top-level owner resources, and temporal batches (2+ resources created together in the same resource group).
+Within a bundle, members are grouped from strongest evidence to weakest: template deployments, parent/child ownership, `managedBy` ownership, property references (including attached user-assigned identities), and timing. Timing only groups resources in the same resource group (and by the same creator, when known), and is always labeled a hypothesis.
 
 ## RBAC & Managed Identities
 
-Shows the roles held by each bundle's system and user-assigned identities, your own role assignments (direct, inherited, and via groups when Microsoft Graph access allows), and your effective access on a bundle: `read`, `write`, `delete`, `assign RBAC`, and `data-plane`. Role definitions for `r perms` are fetched on demand. When something can't be read, it says so (e.g., `unknown (Reader required)`, `denied (requires Microsoft.Authorization/permissions/read)`). PIM-eligible and deny assignments aren't queried.
+Shows the roles held by each bundle's system and user-assigned identities, your own role assignments (direct, inherited, and via groups when Microsoft Graph access allows), and your effective access on a bundle: `read`, `write`, `delete`, `assign RBAC`, and `data-plane`. 
+Role definitions for `r perms` are fetched on demand. When something can't be read, it says so (e.g., `unknown (Reader required)`, `denied (requires Microsoft.Authorization/permissions/read)`). PIM-eligible and deny assignments aren't queried.
 
 ## What it runs
 
-Read-only against Azure (`az account`, `resource list`, `graph query`, `rest --method get`, `role assignment list`, `role definition list`). Locally it runs `az login` if needed, `az account set` when you switch subscriptions, reads your access token only to extract your object ID (`oid`), and writes `azsift/state.json` (last scan per subscription; disable with `-no-state`) in your user config directory. Snapshots are written only with `-save`.
+Read-only against Azure (`az account`, `resource list`, `graph query`, `rest --method get`, `role assignment list`, `role definition list`). 
+Locally it runs `az login` if needed, `az account set` when you switch subscriptions, reads your access token only to extract your object ID (`oid`), and writes `azsift/state.json` (last scan per subscription; disable with `-no-state`) in your user config directory. Snapshots are written only with `-save`.
 
 ## Limitations
 
