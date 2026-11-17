@@ -4,6 +4,9 @@ A CLI tool that maps resources in an Azure subscription into related bundles by 
 
 Built on top of the Azure CLI (`az`) for security research and auditing—especially spotting ungrouped or unlinked resources (or "shadow resources", as I'd like to call them) and checking what identities in a subscription can access. Use it only on subscriptions you are authorized to assess.
 
+## Short demo
+![demo](img/demo.gif)
+
 ## Requirements
 
 - [Go](https://go.dev/) 1.21+
